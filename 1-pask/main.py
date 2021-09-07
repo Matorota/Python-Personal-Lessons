@@ -25,6 +25,7 @@ number2 = 2
 result = number1 + number2
 print(result)
 
-
 #ctrl + click (str ar kitu kodas)
 #alt+ j (pasirinkti kelis)
+
+
