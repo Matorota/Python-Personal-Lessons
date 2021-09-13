@@ -1,6 +1,6 @@
-germna_cars = ["BMW", "AUDI", "Porsche", "Cat", "Blitz", "bruh"]
+varna = ["BMW", "AUDI", "Porsche", "Cat", "Blitz", "bruh"]
 
-for car in germna_cars:
+for car in varna:
     print(car)
 
 for x in range(6):
@@ -9,7 +9,7 @@ for x in range(6):
 for x in range(2, 6):
     print(x)
 
-for x in germna_cars[:2]:
+for x in varna[:2]:
     print(x)
 
 for x in range(5, 100, 5):

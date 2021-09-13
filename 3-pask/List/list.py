@@ -1,23 +1,21 @@
-germna_cars = ["BMW", "AUDI", "Porsche", "Cat"]
+varna = ["BMW", "AUDI", "Porsche", "Cat"]
 japan_cars = ["Tojota", "Mazda", "Nissan"]
 
-#print(type(Germna_cars))
-#print(len(germna_cars))
-#print(germna_cars[1])
-#print(germna_cars[len(germna_cars) - 1])
-#print(germna_cars[-1])
+# print(type(varna))
+# print(len(varna))
+# print(varna[1])
+# print(varna[len(varna) - 1])
+# print(varna[-1])
 
-germna_cars.append("Opel")
-germna_cars.insert(1, "Volvo")
-#germna_cars.extend(japan_cars)
-#germna_cars.remove("Tojota")
+varna.append("Opel")
+varna.insert(1, "Volvo")
+# varna.extend(japan_cars)
+# varna.remove("Tojota")
 
-#germna_cars.pop(1)
-#germna_cars.pop()
-#del germna_cars [0] # pilnai istrina
-#del japan_cars
+# varna.pop(1)
+# varna.pop()
+# del varna [0] # pilnai istrina
+# del japan_cars
 
-#print(japan_cars)
-#print(germna_cars)
-
-
+# print(japan_cars)
+# print(varna)
