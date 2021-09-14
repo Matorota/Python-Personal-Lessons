@@ -1,3 +1,6 @@
+import random
+
+
 varna = ["BMW", "AUDI", "Porsche", "Cat"]
 japan_cars = ["Tojota", "Mazda", "Nissan"]
 
@@ -19,3 +22,4 @@ varna.insert(1, "Volvo")
 
 # print(japan_cars)
 # print(varna)
+
