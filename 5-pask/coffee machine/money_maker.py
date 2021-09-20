@@ -1,23 +1,30 @@
 #MoneyMaker
 class MoneyMaker:
-    def __init__(self, penny, nickel, dime, quarter, half_dollar):
-        self.penny = penny
-        self.nickel = nickel
-        self.dime = dime
-        self.quarter = quarter
-        self.half_dollar = half_dollar
+    money = {
+        "quarters": 0.25,
+        "dimes": 0.10,
+        "nickles": 0.05,
+        "pennies": 0.01
+    }
 
-    def value(self):
-        self.penny = 0.01
-        self.nickel = 0.05
-        self.dime = 0.1
-        self.quarter = 0.25
-        self.half_dollar = 0.5
+    def __init__(self):
+        self.profit = 0
+        self.money_got = 0
 
-    def get_money_info(self):
-        """Shows all Money object values"""
-        print(input(f"How many pennys:\t\t{self.penny}"))
-        print(input(f"How many nickel:\t\t{self.nickel}"))
-        print(input(f"How many dime:\t\t{self.dime}"))
-        print(input(f"How many quarter:\t\t{self.quarter}"))
-        print(input(f"How many half_dollar:\t\t{self.half_dollar}"))
+    def process_coins(self):
+        print("Please insert coins.")
+        for coin in self.money:
+            self.money_got += int(input(f"How many {coin}?: ")) * self.money[coin]
+        return self.money_got
+
+    def make_payment(self, price):
+        self.process_coins()
+        if self.money_got >= price:
+            change = round(self.money_got - price, 2)
+            print(f"Here is your change{change} .")
+            self.profit += price
+            return True
+        else:
+            print("Sorry that's not enough money.")
+            return False
+        self.money_got = 0

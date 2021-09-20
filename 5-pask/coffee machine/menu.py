@@ -1,16 +1,36 @@
 #menu item,
 #menu
 #from menu import Coffe_maker, MoneyMaker
+
+class MenuItem:
+    def __init__(self, name, water, milk, coffee, cost):
+        self.name = name
+        self.cost = cost
+        self.ingredients = {
+            "water": water,
+            "milk": milk,
+            "coffee": coffee
+        }
+
+
 class Menu:
     def __init__(self):
+        self.menu = [
+            MenuItem(name="latte", water=200, milk=50, coffee=20, cost=3),
+            MenuItem(name="espresso", water=50, milk=0, coffee=15, cost=1),
+            MenuItem(name="cappuccino", water=250, milk=20, coffee=20, cost=2),
+        ]
 
-        self.water = 250
-        self.milk = 250
-        self.coffee = 100
-        self.money = 0
+    def get_items(self):
+        options = ""
+        for item in self.menu:
+            options += f"{item.name}/"
+        return options
 
-    # def amount(self):
-    #     self.water = 250
-    #     self.milk = 250
-    #     self.coffee = 100
-    #     self.money = 0
+    def find_drink(self, order_name):
+        for item in self.menu:
+            if item.name == order_name:
+                return item
+        print("Sorry that item is not available.")
+
+
