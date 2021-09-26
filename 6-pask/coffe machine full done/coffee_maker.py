@@ -25,8 +25,13 @@ class CoffeeMaker:
         """Deduct the required ingredients from the resources"""
         for item in order.ingredients:
             self.resources[item] -= order.ingredients[item]
-            print(f"Here is your {order.name} ☕. enjoy!")
+        print(f"Here is your {order.name} ☕. enjoy!")
 
-    # def refill_macihine(self, fill):
-    #     print("")
 
+     def refill(self):
+        self.resources['water'] += int(input("How much refill water?"))
+        self.resources['milk'] += int(input("How much refill milk?"))
+        self.resources['coffee'] += int(input("How much refill coffee?"))
+        print(f"Water: {self.resources['water']}ml")
+        print(f"Milk: {self.resources['milk']}ml")
+        print(f"Coffee: {self.resources['coffee']}g")

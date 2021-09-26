@@ -10,19 +10,17 @@ is_on = True
 
 while is_on:
     options = menu.get_items()
-  #  dronks = menu.get_drinks()
+
     choice = input(f"What would you like?({options})")
-    #refill_input = input(f"what would you like to refill ({dronks})")
+
 
     if choice == "off":
         is_on = False
     elif choice == "report":
         money_machine.report()
         coffee_maker.report()
-    # elif refill_input == "Refill":
-    #     print("bruh")
-    #     # coffee_maker.refill_macihine()
-    #     # Menu.MenuItem()
+    elif choice == "Refill":
+        coffee_maker.refill()
     else:
         drink = menu.find_drink(choice)
         if coffee_maker.is_resource_sufficient(drink) and money_machine.make_payment(drink.cost):
