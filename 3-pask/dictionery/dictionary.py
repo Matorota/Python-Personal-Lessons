@@ -1,20 +1,20 @@
 my_mustang = {
-    "Brand" : "Ford",
-    "Model" : "Mustang",
-    "year" : 1969,
-    "Good_condition " : True
+    "Brand": "Ford",
+    "Model": "Mustang",
+    "year": 1969,
+    "Good_condition ": True
 }
 
 my_nissan = {
-    "Brand" : "Mercedes benz",
-    "Model" : "e-klasse",
-    "year" : 2020,
+    "Brand": "Mercedes benz",
+    "Model": "e-klasse",
+    "year": 2020,
     "Good_condition " : False
 }
 my_ziuguliukas = {
-    "Brand" : "Blinn ",
-    "Model" : "Blinn 2000",
-    "year" : 2008,
+    "Brand": "Blinn ",
+    "Model": "Blinn 2000",
+    "year": 2008,
     "Good_condition " : True
 }
 
