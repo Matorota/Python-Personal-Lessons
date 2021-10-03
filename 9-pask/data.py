@@ -1,21 +1,23 @@
 import os
 class File:
 
-    def __init__(self):
-        self.name = ""
-
+    # def __init__(self):
+    #     self.name = ""
 
     def read(self):
         file = open("notes.txt", "r")
         print(file.read())
         file.close()
 
-    def update(self): #not works
+    def update(self): #CHANGE neveikia
         file = open("notes.txt", "r")
-        replacement = self.name()
+        x = input()
+        replacement = x
         for line in file:
             line = line.strip()
-            changes = line(input("what kinda what do you wanna change?"))
+            line_input = input("to what do you wanna change?")
+            line = line_input
+            changes = line()
             replacement = replacement + changes + "\n"
 
         file.close()
@@ -24,28 +26,28 @@ class File:
         fout.write(replacement)
         fout.close()
 
-
     def add(self):
         with open("notes.txt", "a") as file:
-         file.write(input("What do you wanna add?\n"))
+         file.writelines(["\n"])
+         file.write(input("\nWhat do you wanna add to your notes?"))
          file.writelines(["\n"])
 
-    f = open("notes.txt", "r")
-    print(f.read())
-    f.close()
-
-    def delete(self):  # blogas
+    def delete(self):  # blogas istrina viska
         with open("notes.txt", "r") as f:
             lines = f.readlines()
         with open("notes.txt", "w") as f:
             for line in lines:
-                if line.strip("\n") != "name":
+                x = input("Deletes everything(sad)")
+                if line.strip("\n") != x:
                     f.write(line)
+                else: print("there is no such line")
 
     def line_counter(self):
+        file = open("notes.txt", "r")
         Counter = 0
 
-        Content = self.read.read()
+        # Reading from file
+        Content = file.read()
         CoList = Content.split("\n")
 
         for i in CoList:
@@ -54,6 +56,8 @@ class File:
 
         print("This is the number of lines in the file")
         print(Counter)
+        file.close()
+
 
 
 

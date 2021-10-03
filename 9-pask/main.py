@@ -6,19 +6,21 @@ data = File()
 is_on = True
 
 while is_on:
-    choice = input(f"Do you wanna add, delete, read notes or update")
+    print("TODO LIST")
+    print("you can read line number of thing you have writen down: ReadNum")
+    choice = input(f"Do you wanna add line, delete, read notes or update:")
 
-    if choice == "add":
+    if choice == "add": #veikia
         data.add()
-    elif choice == "delete":
+    elif choice == "delete": # viska istrina
         data.delete()
-    elif choice == "update":
+    elif choice == "update": # neveikia
         data.update()
-    elif choice == "Read":
+    elif choice == "ReadNum": #veikia
+        data.line_counter()
+    elif choice == "Read": #veikia
         data.read()
     elif choice == "off":
         is_on = False
-
-
     else:
         print("there is no such option")
