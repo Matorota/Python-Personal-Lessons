@@ -1,30 +1,22 @@
 import os
+import re
+
 class File:
-
-    # def __init__(self):
-    #     self.name = ""
-
     def read(self):
         file = open("notes.txt", "r")
         print(file.read())
         file.close()
 
     def update(self): #CHANGE neveikia
-        file = open("notes.txt", "r")
-        x = input()
-        replacement = x
-        for line in file:
-            line = line.strip()
-            line_input = input("to what do you wanna change?")
-            line = line_input
-            changes = line()
-            replacement = replacement + changes + "\n"
+        with open("notes.txt", "r+") as file:
+            text =file.read()
+            wrtie_word = str(input("What to replace?"))
+            replace_word = str(input("replace to:"))
+            text = re.sub(wrtie_word,replace_word,text)
+            file.seek(0)
+            file.write(text)
+            file.truncate()
 
-        file.close()
-
-        fout = open("notes.txt", "w")
-        fout.write(replacement)
-        fout.close()
 
     def add(self):
         with open("notes.txt", "a") as file:
@@ -40,7 +32,20 @@ class File:
                 x = input("Deletes everything(sad)")
                 if line.strip("\n") != x:
                     f.write(line)
-                else: print("there is no such line")
+                else: print("there is no ESCAPE")
+
+    def delete_line(self):
+        lineSkip = int(input("Line number:"))
+        with open("notes.txt", "r") as fp:
+            lines = fp.readlines()
+        current_line = 1
+        with open("notes.txt", "w") as wf:
+            for line in lines:
+                if current_line == lineSkip:
+                    pass
+                else:
+                    wf.write(line)
+                current_line += 1
 
     def line_counter(self):
         file = open("notes.txt", "r")
