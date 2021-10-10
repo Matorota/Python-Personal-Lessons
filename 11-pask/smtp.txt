@@ -1,0 +1,5 @@
+Galima suntineti i gmail su - SMTP
+
+Simple Mail Transfer Protocol (SMTP) is a protocol,
+which handles sending e-mail and routing
+e-mail between mail servers.
