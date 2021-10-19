@@ -1,63 +1,40 @@
 import colorgram
-from turtle import Turtle, Screen
+import turtle as t
 import random
-import turtle
 
-# pirmas etapas with colorgram got colors from img
-# colors = colorgram.extract('image.jpg', 8)
-#
-# rgb_colors = []
-# for color in colors:
-#     r = color.rgb.r
-#     g = color.rgb.g
-#     b = color.rgb.b
-#
-#     new_color = (r, g, b)
-#     rgb_colors.append(new_color)
-#     # rgb = color.rg
-#     # rgb_colors.append(rgb)
-#
-#
-# print(rgb_colors)
-#
-#
-#
-# first_color = colors[0]
-# rgb = first_color.rgb
-# print(rgb)
-#
-tur = Turtle()
+colors = colorgram.extract("image.jpg", 10)
 
-# antras
+rgb_colors = []
 
-color_list =[(248, 248, 246), (247, 232, 241), (227, 238, 247), (235, 247, 242), (238, 224, 81), (205, 4, 74), (199, 164, 8), (238, 48, 132), (206, 75, 12), (109, 180, 219)]
+for color in colors:
+    r = color.rgb.r
+    g = color.rgb.g
+    b = color.rgb.b
+    new_color = (r, g, b)
+    rgb_colors.append(new_color)
 
+rgb_colors = rgb_colors[2:]
 
+t.colormode(255)
+tim = t.Turtle()
+screen = t.Screen()
 
-turtle.colormode(255)
+tim.speed("fastest")
+tim.hideturtle()
+tim.penup()
+tim.setheading(225)
+tim.forward(250)
+tim.setheading(0)
 
-def random_color():
-    num = random.randint(0, 6)
-    co = color_list[num]
-    return co
+number_of_dots = 100
 
-def dots():
-    for dot in range(10):
-        tur.pencolor(random_color())
-        tur.dot(20)
-        tur.penup()
-        tur.fd(50)
+for dot_count in range(1, number_of_dots + 1):
+    tim.dot(20, random.choice(rgb_colors))
+    tim.forward(50)
 
-tur.shape("turtle")
-tur.penup()
-i = -200
-for dot in range(10):
-    tur.setposition(-200, i)
-    dots()
-    i += 50
-
-tur.hideturtle()
-
-
-screen = Screen()
-screen.exitonclick()
+    if dot_count % 10 == 0:
+        tim.setheading(90)
+        tim.forward(50)
+        tim.setheading(180)
+        tim.forward(500)
+        tim.setheading(0)

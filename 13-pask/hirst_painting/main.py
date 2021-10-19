@@ -16,7 +16,7 @@ tim.setposition(-200, -200)
 
 
 def draw_hirst(y_coordinate):
-    """takes current y position of turtle """
+
     # draw circles
     for _ in range(10):
         tim.dot(20, r.choice(color_list))
