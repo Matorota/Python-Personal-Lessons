@@ -1,1 +1,42 @@
-# do not need
+question_data = {
+        1: {
+            "question": "The HTML5 standard was published in 2014.?",
+            "answer": "True"
+        },
+        2: {
+            "question": "The first computer bug was formed by faulty wires.?",
+            "answer": "False"
+         },
+        3: {
+            "question": "FLAC stands for 'Free Lossless Audio Condenser'.",
+            "answer": "False"
+        },
+        4: {
+            "question": "All program codes have to be compiled into an executable file in order to be run.This file can then be executed on any machine.",
+            "answer": "False"
+        },
+        5: {
+            "question": "Linus Torvalds created Linux and Git.",
+            "answer": "True"
+        },
+        6: {
+            "question": "The programming language 'Python' is based off a modified version of 'JavaScript'",
+            "answer": "False"
+        },
+        7: {
+            "question": "AMD created the first consumer 64-bit processor.",
+            "answer": "True"
+        },
+        8: {
+            "question": "'HTML' stands for Hypertext Markup Language.",
+            "answer": "True"
+        },
+        9: {
+            "question": "In most programming languages, the operator ++ is equivalent to the statement '+= 1'",
+            "answer": "True"
+        },
+        10: {
+            "question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8  kilobytes of memory.",
+            "answer": "False"
+        }
+    }
