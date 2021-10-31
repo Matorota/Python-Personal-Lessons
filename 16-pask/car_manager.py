@@ -1,44 +1,33 @@
 from turtle import Turtle
-import random as rand
+import random
 
-colors = ["red", "orange", "yellow", "green", "blue", "purple"]
-starting_speed = 5
-movement = 10
-positions = []
+COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+STARTING_SPEED = 5
+SPEED_INCREMENT = 10
 
 
-class Enemy(Turtle):
+class CarManager:
+    def __init__(self):
+        self.all_cars = []
+        self.car_speed = STARTING_SPEED
 
-    def __init__(self, ):
-        self.cars = []
-        self.car_speed = starting_speed
-
-    def add_car(self):
-        random_chance = rand.randint(1,6)
+    def create_car(self):
+        random_chance = random.randint(1, 6)
         if random_chance == 6:
             new_car = Turtle("square")
             new_car.shapesize(stretch_wid=1, stretch_len=2)
             new_car.penup()
-            new_car.colors(rand.choice(colors))
-            random_y = rand.randint(-250, 250)
-            new_car.goto(300, y)
-            new_car.setheading(180)
-            self.cars.append(new_car)
+            new_car.color(random.choice(COLORS))
+            random_y = random.randint(-250, 250)
+            new_car.goto(300, random_y)
+            self.all_cars.append(new_car)
 
-    def move(self):
-        for enemy in self.cars:
-            if enemy.xcor() < -320:
-                enemy.hideturtle()
-                self.cars.remove(enemy)
-            else:
-                enemy.forward(self.start_move)
+    def move_cars(self):
+        for car in self.all_cars:
+            car.backward(self.car_speed)
 
     def level_up(self):
-        self.start_move += movement
-        self.Add += 1
+        self.car_speed += SPEED_INCREMENT
 
-    def reset(self):
-        self.start_move = 5
-        self.Add = 1
 
 

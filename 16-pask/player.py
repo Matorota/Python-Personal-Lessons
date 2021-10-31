@@ -1,25 +1,25 @@
 from turtle import Turtle
-star_pos = (0, -280)
-move_distance = 10
-finnish_line = 280
+STARTING_POSITION = (0, -280)
+TURTLE_SPEED = 10
+FINISH_LINE_Y_CORD = 280
 
 
-class Player(Turtle):
+class Player(Turtle): # tai klausteliuose klasei
     def __init__(self):
-        super().__init__()
+        super().__init__() # leidzia klasei paduoti siuos kintamus
         self.shape("turtle")
-        self.setheading(90)
         self.penup()
-        self.go_to_position()
+        self.setheading(90)
+        self.go_to_start_position()
 
-    def go_to_position(self):
-        self.goto(star_pos)
+    def go_to_start_position(self):
+        self.goto(STARTING_POSITION)
 
-    def up(self):
-        self.forward(move_distance)
+    def go_forward(self):
+        self.forward(TURTLE_SPEED)
 
-    def is_at_finnish(self):
-        if self.ycor()> finnish_line:
+    def is_at_finish(self):
+        if self.ycor() > FINISH_LINE_Y_CORD:
             return True
         else:
             return False
