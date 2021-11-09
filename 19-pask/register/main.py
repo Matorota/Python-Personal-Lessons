@@ -20,7 +20,7 @@ def button_used():
 
 def csv():
     field_name = ['first name', 'last name', 'username', 'email', 'password']
-    input = {'first name':first_name.get(), 'last name':last_name.get(), 'email':username.get(), 'email':email.get(), 'password':password.get()}
+    input = {'first name':first_name.get(), 'last name':last_name.get(), 'username':username.get(), 'email':email.get(), 'password':password.get()}
     with open('data.csv', 'a') as object:
         dictwrite = DictWriter(object, fieldnames=field_name)
         dictwrite.writerow(input)
