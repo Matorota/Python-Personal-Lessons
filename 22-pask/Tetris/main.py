@@ -1,0 +1,176 @@
+import turtle
+import time
+import random
+import winsound
+from Shape import Shape_grid
+winsound.PlaySound("Tetris.mp3", winsound.SND_ASYNC | winsound.SND_ALIAS) # leidzia garsa leisti bacgrounde
+
+shape = Shape_grid()
+
+score = 0
+high_score = 0
+delay = 0.1
+
+wn = turtle.Screen()
+wn.title("TETRIS")
+wn.bgcolor("Lime")
+wn.setup(width=600, height=800)
+wn.tracer(0)
+
+
+def move_left(self, grid):
+    if self.x > 0:
+        if grid[self.y][self.x - 1] == 0:
+            self.erase_shape(grid)
+            self.x -= 1
+
+
+def move_right(self, grid):
+    if self.x < 12 - self.width:
+        if grid[self.y][self.x + self.width] == 0:
+            self.erase_shape(grid)
+            self.x += 1
+
+
+def draw_shape(self, grid):
+    for y in range(self.height):
+        for x in range(self.width):
+            if (self.shape[y][x] == 1):
+                grid[self.y + y][self.x + x] = self.color
+
+
+def erase_shape(self, grid):
+    for y in range(self.height):
+        for x in range(self.width):
+            if (self.shape[y][x] == 1):
+                grid[self.y + y][self.x + x] = 0
+
+
+def can_move(self, grid):
+    result = True
+    for x in range(self.width):
+        if (self.shape[self.height - 1][x] == 1):
+            if (grid[self.y + self.height][self.x + x] != 0):
+                result = False
+    return result
+
+
+def rotate(self, grid):
+    self.erase_shape(grid)
+    rotated_shape = []
+    for x in range(len(self.shape[0])):
+        new_row = []
+        for y in range(len(self.shape) - 1, -1, -1):
+            new_row.append(self.shape[y][x])
+        rotated_shape.append(new_row)
+
+    right_side = self.x + len(rotated_shape[0])
+    if right_side < len(grid[0]):
+        self.shape = rotated_shape
+        self.height = len(self.shape)
+        self.width = len(self.shape[0])
+
+
+grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+pen = turtle.Turtle()
+pen.penup()
+pen.speed(0)
+pen.shape("square")
+pen.setundobuffer(None)
+
+
+def draw_grid(pen, grid):
+    pen.clear()
+    top = 230
+    left = -110
+
+    colors = ["black", "lightblue", "blue", "orange", "yellow", "green", "purple", "red"]
+
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            screen_x = left + (x * 20)
+            screen_y = top - (y * 20)
+            color_number = grid[y][x]
+            color = colors[color_number]
+            pen.color(color)
+            pen.goto(screen_x, screen_y)
+            pen.stamp()
+
+
+def check_grid(grid):
+    y = 23
+    while y > 0:
+        is_full = True
+        for x in range(0, 12):
+            if grid[y][x] == 0:
+                is_full = False
+                y -= 1
+                break
+        if is_full:
+            global score
+            score += 10
+            draw_score(pen, score)
+            for copy_y in range(y, 0, -1):
+                for copy_x in range(0, 12):
+                    grid[copy_y][copy_x] = grid[copy_y - 1][copy_x]
+
+def draw_score(pen, score):
+    pen.color("blue")
+    pen.hideturtle()
+    pen.goto(-75, 350)
+    pen.write("Score: {}".format(score), move=False, align="left", font=("Arial", 24, "normal"))
+
+grid[shape.y][shape.x] = shape.color
+
+wn.listen()
+wn.onkeypress(lambda: shape.move_left(grid), "a")
+wn.onkeypress(lambda: shape.move_right(grid), "d")
+wn.onkeypress(lambda: shape.rotate(grid), "space")
+
+draw_score(pen, score)
+
+
+while True:
+    wn.update()
+
+
+    if shape.y == 23 - shape.height + 1:
+        shape()
+        check_grid(grid)
+
+
+    draw_grid(pen, grid)
+    draw_score(pen, score)
+
+    time.sleep(delay)
+
+
+
+
+wn.mainloop()
