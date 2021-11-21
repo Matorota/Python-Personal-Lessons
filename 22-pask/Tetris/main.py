@@ -2,73 +2,104 @@ import turtle
 import time
 import random
 import winsound
-from Shape import Shape_grid
-winsound.PlaySound("Tetris.mp3", winsound.SND_ASYNC | winsound.SND_ALIAS) # leidzia garsa leisti bacgrounde
-
-shape = Shape_grid()
-
-score = 0
-high_score = 0
-delay = 0.1
+# from Shape import Shape_grid
+winsound.PlaySound("Tetris.mp3", winsound.SND_ASYNC | winsound.SND_ALIAS) # leidzia garsa leisti bacgrounde (jau neleidzia)
 
 wn = turtle.Screen()
 wn.title("TETRIS")
-wn.bgcolor("Lime")
+wn.bgcolor("lime")
 wn.setup(width=600, height=800)
 wn.tracer(0)
 
-
-def move_left(self, grid):
-    if self.x > 0:
-        if grid[self.y][self.x - 1] == 0:
-            self.erase_shape(grid)
-            self.x -= 1
+delay = 0.1
 
 
-def move_right(self, grid):
-    if self.x < 12 - self.width:
-        if grid[self.y][self.x + self.width] == 0:
-            self.erase_shape(grid)
-            self.x += 1
+class Shape():
+    def __init__(self):
+        self.x = 5
+        self.y = 0
+        self.color = random.randint(1, 7)
 
+        square = [[1, 1],
+                  [1, 1]]
 
-def draw_shape(self, grid):
-    for y in range(self.height):
-        for x in range(self.width):
-            if (self.shape[y][x] == 1):
-                grid[self.y + y][self.x + x] = self.color
+        horizontal_line = [[1, 1, 1, 1]]
 
+        vertical_line = [[1],
+                         [1],
+                         [1],
+                         [1]]
 
-def erase_shape(self, grid):
-    for y in range(self.height):
-        for x in range(self.width):
-            if (self.shape[y][x] == 1):
-                grid[self.y + y][self.x + x] = 0
+        left_l = [[1, 0, 0, 0],
+                  [1, 1, 1, 1]]
 
+        right_l = [[0, 0, 0, 1],
+                   [1, 1, 1, 1]]
 
-def can_move(self, grid):
-    result = True
-    for x in range(self.width):
-        if (self.shape[self.height - 1][x] == 1):
-            if (grid[self.y + self.height][self.x + x] != 0):
-                result = False
-    return result
+        left_s = [[1, 1, 0],
+                  [0, 1, 1]]
 
+        right_s = [[0, 1, 1],
+                   [1, 1, 0]]
 
-def rotate(self, grid):
-    self.erase_shape(grid)
-    rotated_shape = []
-    for x in range(len(self.shape[0])):
-        new_row = []
-        for y in range(len(self.shape) - 1, -1, -1):
-            new_row.append(self.shape[y][x])
-        rotated_shape.append(new_row)
+        t = [[0, 1, 0],
+             [1, 1, 1]]
 
-    right_side = self.x + len(rotated_shape[0])
-    if right_side < len(grid[0]):
-        self.shape = rotated_shape
+        shapes = [square, horizontal_line, vertical_line, left_l, right_l, left_s, right_s, t]
+
+        self.shape = random.choice(shapes)
+
         self.height = len(self.shape)
         self.width = len(self.shape[0])
+
+        # print(self.height, self.width)
+
+    def move_left(self, grid):
+        if self.x > 0:
+            if grid[self.y][self.x - 1] == 0:
+                self.erase_shape(grid)
+                self.x -= 1
+
+    def move_right(self, grid):
+        if self.x < 12 - self.width:
+            if grid[self.y][self.x + self.width] == 0:
+                self.erase_shape(grid)
+                self.x += 1
+
+    def draw_shape(self, grid):
+        for y in range(self.height):
+            for x in range(self.width):
+                if (self.shape[y][x] == 1):
+                    grid[self.y + y][self.x + x] = self.color
+
+    def erase_shape(self, grid):
+        for y in range(self.height):
+            for x in range(self.width):
+                if (self.shape[y][x] == 1):
+                    grid[self.y + y][self.x + x] = 0
+
+    def can_move(self, grid):
+        result = True
+        for x in range(self.width):
+            if (self.shape[self.height - 1][x] == 1):
+                if (grid[self.y + self.height][self.x + x] != 0):
+                    result = False
+        return result
+
+    def rotate(self, grid):
+        self.erase_shape(grid)
+        rotated_shape = []
+        for x in range(len(self.shape[0])):
+            new_row = []
+            for y in range(len(self.shape) - 1, -1, -1):
+                new_row.append(self.shape[y][x])
+            rotated_shape.append(new_row)
+
+        right_side = self.x + len(rotated_shape[0])
+        if right_side < len(grid[0]):
+            self.shape = rotated_shape
+            self.height = len(self.shape)
+            self.width = len(self.shape[0])
 
 
 grid = [
@@ -98,6 +129,7 @@ grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+# Create the drawing pen
 pen = turtle.Turtle()
 pen.penup()
 pen.speed(0)
@@ -140,37 +172,47 @@ def check_grid(grid):
                 for copy_x in range(0, 12):
                     grid[copy_y][copy_x] = grid[copy_y - 1][copy_x]
 
+
 def draw_score(pen, score):
     pen.color("blue")
     pen.hideturtle()
     pen.goto(-75, 350)
     pen.write("Score: {}".format(score), move=False, align="left", font=("Arial", 24, "normal"))
 
+
+shape = Shape()
+
 grid[shape.y][shape.x] = shape.color
+
 
 wn.listen()
 wn.onkeypress(lambda: shape.move_left(grid), "a")
 wn.onkeypress(lambda: shape.move_right(grid), "d")
 wn.onkeypress(lambda: shape.rotate(grid), "space")
 
-draw_score(pen, score)
+score = 0
 
+draw_score(pen, score)
 
 while True:
     wn.update()
 
-
     if shape.y == 23 - shape.height + 1:
-        shape()
+        shape = Shape()
         check_grid(grid)
+    elif shape.can_move(grid):
+        shape.erase_shape(grid)
 
+        shape.y += 1
+
+        shape.draw_shape(grid)
+
+    else:
+        shape = Shape()
+        check_grid(grid)
 
     draw_grid(pen, grid)
     draw_score(pen, score)
 
     time.sleep(delay)
-
-
-
-
 wn.mainloop()
