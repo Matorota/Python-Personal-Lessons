@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 URL ="https://www.python.org/"
-DRIVER_PATH = r"C:\Users\matas\Desktop\chromedriver.exe"
+DRIVER_PATH = r"C:\Users\Admin\Desktop\chromedriver.exe"
 
 driver = webdriver.Chrome(executable_path=DRIVER_PATH)
 driver.get(URL)
