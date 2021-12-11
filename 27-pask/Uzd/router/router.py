@@ -8,5 +8,5 @@ router = APIRouter(
 )
 
 @router.get('')
-def hello():
-    return repo.hello()
+def get_price():
+    return repo.get_price()
