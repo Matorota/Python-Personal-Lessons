@@ -15,17 +15,32 @@ class UserSmallInfo(BaseModel):
         orm_mode = True
 
 
+class BlogSettingsCreate(BaseModel):
+    is_active: bool
+
+
 class BlogCreate(BaseModel):
     title: str
     body: str
+    settings: BlogSettingsCreate # eil 18
+
+
+class SettingsSmallInfo(BaseModel):
+    id: int
+    is_active: bool
 
 
 class Blog(BaseModel):
     id: int
     title: str
     body: Optional[str] = None
+
     owner_id: int
     owner: Optional[UserSmallInfo]
+
+    setting_id: int
+    setting: SettingsSmallInfo
+
 
     class Config:
         orm_mode = True

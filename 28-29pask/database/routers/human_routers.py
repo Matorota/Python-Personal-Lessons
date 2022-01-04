@@ -11,6 +11,7 @@ router = APIRouter(
     tags=['Humans']
 )
 
+
 @router.get('', response_model=List[schemas.HumanShortInfo])
 def all(db: Session = Depends(get_db)):
     return repo.get_humans_short_info(db)
@@ -25,9 +26,11 @@ def get_singe(id: int, db: Session = Depends(get_db)):
 def create(request: schemas.HumanShortInfo, db: Session = Depends(get_db)):
     return repo.create_human(request, db)
 
+
 @router.put('/update/{id}')
 def update(id: int, request:schemas.HumanPost, db: Session = Depends(get_db)):
     return repo.update_human(id, request, db)
+
 
 @router.delete('/delete/{id}')
 def delete(id: int, db:Session = Depends(get_db)):
