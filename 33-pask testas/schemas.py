@@ -2,6 +2,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class UserCreate(BaseModel):
     email: str
     password: str
@@ -14,11 +15,13 @@ class UserSmallInfo(BaseModel):
     class Config:
         orm_mode = True
 
+
 class CarSettingsCreate(BaseModel):
     is_active: bool
 
+
 class CarCreate(BaseModel):
-    years: str
+    years: int
     model: str
     price: int
     settings: CarSettingsCreate
@@ -39,25 +42,34 @@ class SettingsUserInfo(BaseModel):
     mel_mp: str
     rida: int
     is_active: bool
-#
+
+
+class CarBrands(BaseModel):
+    id: int
+    model: str
+    is_active: bool
+
 
 class Car(BaseModel):
-    years: str
-    model: str
+    years: int
     price: int
     body: Optional[str] = None
 
     owner_id: int
     owner: Optional[UserSmallInfo]
 
-    setting_id: int
+    setting_id_car: int
     setting: SettingsCarInfo
 
-    setting_id: int
+    setting_id_user: int
     setting: SettingsUserInfo
 
-    class Config:
-        orm_mode = True
+    setting_id_brand: int
+    setting: CarBrands
+
+
+class Config:
+    orm_mode = True
 
 
 class User(BaseModel):
