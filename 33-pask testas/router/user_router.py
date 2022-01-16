@@ -1,26 +1,32 @@
-from fastapi import APIRouter, Depends
 from typing import List
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session, selectinload
+from repository import user_repository as repo
 import models
 import schemas
 from database import get_db
-from repository import user_repository as repo
 
 router = APIRouter(
-    prefix='/api/user',
+    prefix='/api/users',
     tags=['Users']
 )
 
 
-@router.get('', response_model=List[schemas.User])  # get users
+@router.get('', response_model=List[schemas.UserInfo])
 def all(db: Session = Depends(get_db)):
-    return repo.get_all_users(db)
+    return repo.get_all(db)
 
 
-@router.post('/create_user')
-def create_users(request: schemas.UserCreate, db: Session = Depends(get_db)):
-    return  repo.create_users(request, db)
+@router.post('/create')
+def create_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
+    return repo.create(request, db)
 
-@router.post('/create_user_settings')
-def create_users(request: schemas.SettingsUserInfo, db: Session = Depends(get_db)):
-    return  repo.create_user_settings(request, db)
+
+@router.put('/update/{id}')
+def update(id: int, request: schemas.UserInfo, db: Session = Depends(get_db)):
+    return repo.update(id, request, db)
+
+
+@router.delete('/delete/{id}')
+def delete(id: int, db: Session = Depends(get_db)):
+    return repo.delete(id, db)

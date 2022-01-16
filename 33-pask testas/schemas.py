@@ -1,82 +1,98 @@
-from typing import List, Optional
 from pydantic import BaseModel
-from datetime import datetime
+
+
+class UserInfo(BaseModel):
+    id: int
+    gmail: str
+    kategorija: str
+
+    class Config:
+        orm_mode = True
 
 
 class UserCreate(BaseModel):
-    email: str
-    password: str
-
-
-class UserSmallInfo(BaseModel):
-    id: int
-    email: str
+    gmail: str
+    kategorija: str
 
     class Config:
         orm_mode = True
 
 
-class CarSettingsCreate(BaseModel):
-    is_active: bool
+class BrandCreate(BaseModel):
+    brand_name: str
+
+
+class BrandInfo(BaseModel):
+    id: int
+    brand_name: str
+
+    class Config:
+        orm_mode = True
+
+
+class ModelCreate(BaseModel):
+    model_name: str
+
+
+class ModelInfo(BaseModel):
+    id: int
+    model_name: str
+
+    class Config:
+        orm_mode = True
+
+
+class SettingsCreate(BaseModel):
+    consumption: str
+    odometer: str
+    user_id: int
+
+
+class SettingsInfo(BaseModel):
+    id: int
+    consumption: str
+    odometer: str
+
+    class Config:
+        orm_mode = True
 
 
 class CarCreate(BaseModel):
-    years: int
-    model: str
-    price: int
-    settings: CarSettingsCreate
+    year: int
+    more_info: str
+    price: str
+    more_info: str
+    brand_id: int
+    model_id: int
+    users_id: int
 
 
-class SettingsCarInfo(BaseModel):
-    id: int
-    mileage: int
-    time: int
-    is_active: bool
-
-
-class SettingsUserInfo(BaseModel):
-    id: int
-    consumption_km: str
-    consumption_mp: str
-    mel_km: str
-    mel_mp: str
-    rida: int
-    is_active: bool
-
-
-class CarBrands(BaseModel):
-    id: int
-    model: str
-    is_active: bool
-
-
-class Car(BaseModel):
-    years: int
-    price: int
-    body: Optional[str] = None
-
-    owner_id: int
-    owner: Optional[UserSmallInfo]
-
-    setting_id_car: int
-    setting: SettingsCarInfo
-
-    setting_id_user: int
-    setting: SettingsUserInfo
-
-    setting_id_brand: int
-    setting: CarBrands
-
-
-class Config:
-    orm_mode = True
-
-
-class User(BaseModel):
-    id: int
-    email: str
-    password: str
-    userCars: List[Car] = []
+class CarInfo(BaseModel):
+    year: int
+    more_info: str
+    price: str
 
     class Config:
         orm_mode = True
+
+
+class MileageInfo(BaseModel):
+    id: int
+    mileage_record: int
+    time: str
+
+
+    class Config:
+        orm_mode = True
+
+
+class MileageCreate(BaseModel):
+    mileage_record: int
+    time: str
+    car_id: int
+
+
+
+
+
+

@@ -4,31 +4,46 @@ import models
 import schemas
 
 
-def get_all_users(db: Session):
+def get_all(db: Session):
     return db.query(models.User).all()
 
 
-def create_users(request: schemas.UserCreate, db: Session):
+def create(request: schemas.UserCreate, db: Session):
     new_user = models.User(
-        email=request.email,
-        password=request.password,
+        gmail=request.gmail,
+        kategorija=request.kategorija,
     )
 
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
     return new_user
 
-def create_user_settings(request:schemas.SettingsUserInfo, db: Session):
-    new_user_settings = models.UserSettings(
-        consumption_km=request.consumption_km,
-        consumption_mp=request.consumption_mp,
-        mel_km=request.mel_km,
-        mel_mp=request.mel_mp,
-        rida=request.rida,
-    )
-    db.add(new_user_settings)
-    db.commit()
-    db.refresh(new_user_settings)
-    return new_user_settings
 
+def update(id: int, request: schemas.UserInfo, db: Session):
+    user = db.query(models.User).filter(models.User.id == id)
+
+    if not user.first:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User with id {id} not found"
+        )
+    user.update(request.dict())
+    db.commit()
+
+    return user.first()
+
+
+def delete(id: int, db: Session):
+    user = db.query(models.User).filter(models.User.id == id)
+
+    if not user.first:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User with id {id} not found"
+        )
+    user.delete(synchronize_session=False)
+    db.commit()
+
+    return {"details": "Success"}

@@ -4,76 +4,50 @@ import models
 import schemas
 
 
-def get_all_cars(db: Session):
+def get_all(db: Session):
     return db.query(models.Car).all()
 
 
-def create_car(request: schemas.CarCreate, db: Session, user_id: int):
-    new_settings_user = models.UserSettings(
-        is_active=request.settings.is_active
-    )
-    db.add(new_settings_user)
-    db.commit()
-    db.refresh(new_settings_user)
-
-    new_settings_car = models.CarSettings(
-        is_active=request.settings.is_active
-    )
-    db.add(new_settings_car)
-    db.commit()
-    db.refresh(new_settings_car)
-
-    new_setting_brand = models.CarBrands(
-        is_active=request.settings.is_active
-    )
-    db.add(new_setting_brand)
-    db.commit()
-    db.refresh(new_setting_brand)
-
-    new_post = models.Car(
-        years=request.years,
-        owner_id=user_id,
-        setting_id_user=new_settings_user.id,
-        setting_id_car=new_settings_car.id,
-        setting_id_brand=new_setting_brand.id
+def create(request: schemas.CarCreate, db: Session):
+    new_car = models.Car(
+        year=request.year,
+        price=request.fuel_type,
+        more_info=request.gearbox,
+        brand_id=request.brand_id,
+        model_id=request.model_id,
+        users_id=request.users_id
     )
 
-    db.add(new_post)
+    db.add(new_car)
     db.commit()
-    db.refresh(new_post)
-    return new_post
+    db.refresh(new_car)
+    return new_car
 
 
-def create_brand(request: schemas.CarBrands, db: Session):
-    new_brand = models.CarBrands(
-        model=request.model,
-    )
+def update(id: int, request: schemas.CarInfo, db: Session):
+    car = db.query(models.Car).filter(models.Car.id == id)
 
-    db.add(new_brand)
-    db.commit()
-    db.refresh(new_brand)
-    return new_brand
-
-def create_car_settings(request: schemas.CarSettingsCreate, db: Session):
-    new_car_settings = models.UserSettings(
-        mileage=request.consumption_km,
-        time=request.consumption_mp,
-    )
-    db.add(new_car_settings)
-    db.commit()
-    db.refresh(new_car_settings)
-    return new_car_settings
-
-def update_car(id: int, request: schemas.Car, db: Session):
-    car = db.query(models.car).filter(models.car.id == id)
-
-    if not cars.first():
+    if not car.first:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Blog with id {id} not found"
+            detail=f"Car with id {id} not found"
         )
 
     car.update(request.dict())
     db.commit()
-
     return car.first()
+
+
+def delete(id: int, db: Session):
+    car = db.query(models.Car).filter(models.Car.id == id)
+
+    if not car.first():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Car with id {id} not found"
+        )
+    car.delete(synchronize_session=False)
+    db.commit()
+
+    return {"details": "Success"}
+
