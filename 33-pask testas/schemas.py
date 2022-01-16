@@ -34,18 +34,18 @@ class ModelCreate(BaseModel):
     model_name: str
 
 
+class SettingsCreate(BaseModel):
+    consumption: str
+    odometer: str
+    user_id: int
+
+
 class ModelInfo(BaseModel):
     id: int
     model_name: str
 
     class Config:
         orm_mode = True
-
-
-class SettingsCreate(BaseModel):
-    consumption: str
-    odometer: str
-    user_id: int
 
 
 class SettingsInfo(BaseModel):
@@ -59,7 +59,6 @@ class SettingsInfo(BaseModel):
 
 class CarCreate(BaseModel):
     year: int
-    more_info: str
     price: str
     more_info: str
     brand_id: int
@@ -69,8 +68,8 @@ class CarCreate(BaseModel):
 
 class CarInfo(BaseModel):
     year: int
-    more_info: str
     price: str
+    more_info: str
 
     class Config:
         orm_mode = True
