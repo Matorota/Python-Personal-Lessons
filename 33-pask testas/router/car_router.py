@@ -1,8 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 from repository import car_repository as repo
-import models
 import schemas
 from database import get_db
 

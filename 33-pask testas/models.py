@@ -4,6 +4,7 @@ from database import Base
 
 
 class User(Base):
+
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -15,6 +16,7 @@ class User(Base):
 
 
 class Brand(Base):
+
     __tablename__ = 'brands'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -24,6 +26,7 @@ class Brand(Base):
 
 
 class Model(Base):
+
     __tablename__ = 'models'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -33,6 +36,7 @@ class Model(Base):
 
 
 class Settings(Base):
+
     __tablename__ = 'settings'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -46,6 +50,7 @@ class Settings(Base):
 
 
 class Car(Base):
+
     __tablename__ = 'cars'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -55,14 +60,18 @@ class Car(Base):
 
     users_id = Column(Integer, ForeignKey('users.id'))
     user = relationship('User', back_populates='car')
+
     brand_id = Column(Integer, ForeignKey('brands.id'))
     brand = relationship('Brand', back_populates='car')
+
     model_id = Column(Integer, ForeignKey('models.id'))
     model = relationship('Model', back_populates='car')
+
     mileage = relationship("Mileage", back_populates="car")
 
 
 class Mileage(Base):
+
     __tablename__ = 'mileage'
 
     id = Column(Integer, primary_key=True, index=True)

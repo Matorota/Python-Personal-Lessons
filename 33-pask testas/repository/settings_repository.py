@@ -1,5 +1,5 @@
 from fastapi import status, HTTPException
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 import models
 import schemas
 
@@ -9,7 +9,6 @@ def get_all(db: Session):
 
 
 def create(request: schemas.SettingsCreate, db: Session):
-    global id
     new_settings = models.Settings(
         consumption=request.consumption,
         odometer=request.odometer,

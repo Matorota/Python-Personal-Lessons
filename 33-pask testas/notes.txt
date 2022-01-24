@@ -1,6 +1,1 @@
-create car dar neveikia
-
-read perzvegti
-
-delete ir update padaryti
-
+no notes all objectives completed

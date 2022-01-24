@@ -1,5 +1,5 @@
 from fastapi import status, HTTPException
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 import models
 import schemas
 from datetime import datetime
@@ -38,7 +38,7 @@ def update(id: int, request: schemas.MileageInfo, db: Session):
     return mileage.first()
 
 
-def delete(id: int, db: Session):
+def delete( id: int, db: Session):
     mileage = db.query(models.Mileage).filter(models.Mileage.id == id)
 
     if not mileage.first:

@@ -1,5 +1,5 @@
 from fastapi import status, HTTPException
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 import models
 import schemas
 
@@ -11,8 +11,8 @@ def get_all(db: Session):
 def create(request: schemas.CarCreate, db: Session):
     new_car = models.Car(
         year=request.year,
-        price=request.fuel_type,
-        more_info=request.gearbox,
+        price=request.price,
+        more_info=request.more_info,
         brand_id=request.brand_id,
         model_id=request.model_id,
         users_id=request.users_id

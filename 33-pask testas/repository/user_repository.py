@@ -1,5 +1,5 @@
 from fastapi import status, HTTPException
-from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm import Session
 import models
 import schemas
 
